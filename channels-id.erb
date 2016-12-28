@@ -1,0 +1,61 @@
+api_key = AIzaSyAdo38I0lemPp5gZvo6ejA0n2fnmK346iM
+escolhasegura = UCDUdvPnNWjQCif_GnrhUE6Q
+linuxbrs = UCxfiU1Yr2qwbhrvibG03aBw
+brasiligeeks = UCYScNUfCLI_LBmUzfHIZ0lg
+dudurochatec = UCIhmXuqtOQVJCPbh_tXns1g
+
+channel = Yt::Channel.new id: 'UCDUdvPnNWjQCif_GnrhUE6Q'
+channel.videos.take(1).map{ |f| [f.title, f.id]}
+
+# código para rodar testes #
+Yt.configuration.api_key = "AIzaSyAdo38I0lemPp5gZvo6ejA0n2fnmK346iM"
+channel = Yt::Channel.new url:'https://www.youtube.com/c/escolhaseguratv'
+@videos = channel.videos.take(3).map(&:id)
+@videos.@vsave
+
+@videos.each do |vid|
+  video = Yt::Video.new id:vid
+  puts video.title
+  puts video.description
+  puts video.published_at # => 2015-03-31 06:46:46 UTC
+  puts video.thumbnail_url
+  puts video.channel_title # => "Yt test Channel"
+  puts video.duration
+end
+
+
+#configurar o Api_Key
+Yt.configuration.api_key = "AIzaSyAdo38I0lemPp5gZvo6ejA0n2fnmK346iM"
+
+#montar variável com todos os channel ID#
+YTCHID = %w(UCDUdvPnNWjQCif_GnrhUE6Q UCxfiU1Yr2qwbhrvibG03aBw UCYScNUfCLI_LBmUzfHIZ0lg UCIhmXuqtOQVJCPbh_tXns1g)
+
+YTCHID.each do |channelid|
+  channel = Yt::Channel.new id:channelid
+  videosid = channel.videos.take(1).map(&:id)
+  videosid.each do |vid|
+    video = Yt::Video.new id:vid
+    Video.create(title:video.title,
+                url:"http://youtube.com/watch?v=#{vid}",
+                description: video.description,
+                published_at: video.published_at.strftime('%Y-%m-%d %H:%M:%S'),
+                thumbnail_url: video.thumbnail_url,
+                channel_title: video.channel_title,
+                duration: video.duration)
+    end
+end
+
+#rodar o código 1x por dia, tenho de lembrar de apagar os registros de ID anteriores#
+every 1.day, :at => '12:00 pm' do
+
+end
+
+#se o canal for do linux, pegar uns últimos 15 vídeos, lembrar de salvar#
+YTCHID.each
+
+#para os oturos canais, pegar 3 videos, lembrar de salvar em um DB#
+channel.videos.take(3).map(&:id)
+
+#depois de salvo todos os IDs em um DB, filtrar apenas os que foram published_at today#
+
+#renderizar todo o resto.

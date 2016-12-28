@@ -1,0 +1,10 @@
+<h1>Video#index</h1>
+
+<% @videos3day = @videos.where(published_at: 3.days.ago..Time.now) %>
+<% @videos3day.each do |video| %>
+  <div style="margin:10px;">
+  <p><%= video.title %></p>
+  <p><%= video.url %></p>
+  <p><%= video.published_at %></p>
+</div>
+<% end %>
