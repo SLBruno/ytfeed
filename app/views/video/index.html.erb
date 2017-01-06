@@ -6,7 +6,11 @@
     <% @videos2day = @videos.where(published_at: 2.days.ago..Time.now) %>
     <% @videos5day = @videos.where(published_at: 50.days.ago..Time.now) %>
 
-      <h2>Vídeos Dessa Semana</h2>
+      <h2>Hoje</h2>
+
+      <h2> Ontem </h2>
+
+      <h2>Dessa Semana</h2>
         <% @videos5day.in_groups_of(4) do |group| %>
           <div class="row">
             <% group.each do |video| %>
