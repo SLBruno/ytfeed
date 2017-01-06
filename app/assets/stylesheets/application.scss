@@ -13,3 +13,42 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+$blue: #167ac6;
+$grey: #767676;
+
+
+#main-content {
+  background-color: #ffffff;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+h3 {
+  color: $blue;
+  font-size: 1.1em;
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+
+h5 {
+  color: $grey;
+  margin: 0px;
+  font-size: 0.9em;
+  font-weight: 400;
+}
+
+.responsive-img {
+  width: 100%;
+}
+
+.video-duration {
+  background-color: black;
+  color: white;
+  position: relative;
+
+}

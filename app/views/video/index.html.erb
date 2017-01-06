@@ -1,10 +1,25 @@
-<h1>Video#index</h1>
+<div id="main-content">
+  <div class="container">
+    <h1>Vídeos Tech</h1>
+    <h4> Fique por dentro do melhor conteúdo de tecnologia no Youtube, todo dia!</h4>
 
-<% @videos3day = @videos.where(published_at: 3.days.ago..Time.now) %>
-<% @videos3day.each do |video| %>
-  <div style="margin:10px;">
-  <p><%= video.title %></p>
-  <p><%= video.url %></p>
-  <p><%= video.published_at %></p>
-</div>
-<% end %>
+    <% @videos2day = @videos.where(published_at: 2.days.ago..Time.now) %>
+    <% @videos5day = @videos.where(published_at: 50.days.ago..Time.now) %>
+
+      <h2>Vídeos Dessa Semana</h2>
+        <% @videos5day.in_groups_of(4) do |group| %>
+          <div class="row">
+            <% group.each do |video| %>
+              <% if video %>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="panel-default">
+                    <%= image_tag(video.thumbnail_url, class:"responsive-img") %>
+                    <h3><%= link_to video.title, video.url %></h3>
+                    <h5><%= video.channel_title %> | <%= time_ago_in_words(video.published_at) %></h5>
+                    <!-- <p><%= video.description %></p> -->
+                  </div>
+                </div>
+                <% end %>
+              <% end %>
+          </div>
+            <% end %>
